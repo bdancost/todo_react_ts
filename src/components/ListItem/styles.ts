@@ -91,7 +91,7 @@ export const Modal = styled.div`
 export const ModalButton = styled.button<{ variant?: "danger" | "cancel" }>`
   background: ${(props) =>
     props.variant === "danger" ? "#e74c3c" : "#e0e0e0"};
-  color: ${(props) => (props.variant === "danger" ? "#fff" : "#000")};
+  color: ${(props) => (props.variant === "danger" ? "#000" : "#000")};
   border: none;
   padding: 10px 20px;
   border-radius: 8px;

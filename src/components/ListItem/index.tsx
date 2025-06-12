@@ -47,15 +47,28 @@ export const ListItem = ({ item, onChange, onRemove }: Props) => {
                   setConfirming(false);
                 }}
               >
-                <Trash2 size={18} />
-                Sim
+                <button
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    border: 10,
+                    background: "#e74c3c",
+                    borderRadius: "8px",
+                    padding: "8px 16px",
+                    color: "#000",
+                  }}
+                >
+                  <Trash2 size={18} />
+                  Sim
+                </button>
               </C.ModalButton>
               <C.ModalButton
                 variant="cancel"
                 onClick={() => setConfirming(false)}
               >
                 <X size={18} />
-                Cancelar
+                Não
               </C.ModalButton>
             </div>
           </C.Modal>
