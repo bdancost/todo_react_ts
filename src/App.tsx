@@ -39,13 +39,23 @@ const App = () => {
     );
   };
 
+  const handleRemoveTask = (id: number) => {
+    const filteredList = list.filter((item) => item.id !== id);
+    setList(filteredList);
+  };
+
   return (
     <C.Container>
       <C.Area>
         <C.Header>Lista de Tarefas</C.Header>
         <AddArea onEnter={handleAddTask} />
         {list.map((item) => (
-          <ListItem key={item.id} item={item} onChange={handleTaskChange} />
+          <ListItem
+            key={item.id}
+            item={item}
+            onChange={handleTaskChange}
+            onRemove={handleRemoveTask}
+          />
         ))}
       </C.Area>
     </C.Container>
