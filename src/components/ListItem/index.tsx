@@ -53,10 +53,12 @@ export const ListItem = ({ item, onChange, onRemove }: Props) => {
                     alignItems: "center",
                     gap: "8px",
                     border: 10,
-                    background: "#e74c3c",
+                    background: "#e74c1c",
                     borderRadius: "8px",
                     padding: "8px 16px",
-                    color: "#000",
+                    color: "#fff",
+                    fontWeight: "bold",
+                    cursor: "pointer",
                   }}
                 >
                   <Trash2 size={18} />
@@ -67,8 +69,23 @@ export const ListItem = ({ item, onChange, onRemove }: Props) => {
                 variant="cancel"
                 onClick={() => setConfirming(false)}
               >
-                <X size={18} />
-                Não
+                <button
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    border: 10,
+                    background: "#e74c3c",
+                    borderRadius: "8px",
+                    padding: "8px 16px",
+                    color: "#fff",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                  }}
+                >
+                  <X size={18} />
+                  Não
+                </button>
               </C.ModalButton>
             </div>
           </C.Modal>

@@ -83,8 +83,14 @@ export const Modal = styled.div`
 
   .buttons {
     display: flex;
+    align-items: center;
     justify-content: center;
     gap: 12px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 300px;
+    padding: 0 20px;
+    box-sizing: border-box;
   }
 `;
 
