@@ -5,23 +5,20 @@ import { ListItem } from "./components/ListItem";
 import { AddArea } from "./components/AddArea";
 
 const App = () => {
-  const [list, setList] = useState<Item[]>([]);
-
-  // Carregar tarefas do localStorage
-  useEffect(() => {
-    const savedList = localStorage.getItem("todoList");
-    if (savedList) {
+  const [list, setList] = useState<Item[]>(() => {
+    const saved = localStorage.getItem("todoList");
+    if (saved) {
       try {
-        const parsedList: Item[] = JSON.parse(savedList);
-        setList(parsedList);
-      } catch (error) {
-        console.error("Erro ao carregar tarefas:", error);
-        localStorage.removeItem("todoList"); // limpa dados corrompidos
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Erro ao fazer parse do localStorage:", e);
+        return [];
       }
     }
-  }, []);
+    return [];
+  });
 
-  // Salvar tarefas no localStorage sempre que mudar
+  // Salva sempre que mudar
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(list));
   }, [list]);
@@ -33,24 +30,20 @@ const App = () => {
       done: false,
       createdAt: new Date().toISOString(),
     };
-
-    setList((prevList) => [...prevList, newTask]);
+    setList((prev) => [...prev, newTask]);
   };
 
   const handleTaskChange = (id: number, done: boolean) => {
-    const newList = list.map((item) =>
-      item.id === id ? { ...item, done } : item
+    setList((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, done } : item))
     );
-    setList(newList);
   };
 
   return (
     <C.Container>
       <C.Area>
         <C.Header>Lista de Tarefas</C.Header>
-
         <AddArea onEnter={handleAddTask} />
-
         {list.map((item) => (
           <ListItem key={item.id} item={item} onChange={handleTaskChange} />
         ))}
