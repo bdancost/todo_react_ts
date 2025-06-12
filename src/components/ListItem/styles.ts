@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 type ContainerProps = {
-  done: boolean;
+  $done: boolean;
 };
 
 export const Container = styled.div<ContainerProps>`
@@ -20,6 +20,6 @@ export const Container = styled.div<ContainerProps>`
 
   label {
     color: #ccc;
-    text-decoration: ${(props) => (props.done ? "line-through" : "initial")};
+    text-decoration: ${(props) => (props.$done ? "line-through" : "initial")};
   }
 `;

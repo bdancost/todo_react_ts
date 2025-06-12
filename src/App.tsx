@@ -1,32 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as C from "./App.styles";
 import { Item } from "./types/Item";
 import { ListItem } from "./components/ListItem";
 import { AddArea } from "./components/AddArea";
 
 const App = () => {
-  const [list, setList] = useState<Item[]>([
-    { id: 1, name: "Estudar Ingles", done: false },
-    { id: 2, name: "Estudar React", done: false },
-  ]);
+  const [list, setList] = useState<Item[]>([]);
+
+  // Carregar tarefas do localStorage
+  useEffect(() => {
+    const savedList = localStorage.getItem("todoList");
+    if (savedList) {
+      try {
+        const parsedList: Item[] = JSON.parse(savedList);
+        setList(parsedList);
+      } catch (error) {
+        console.error("Erro ao carregar tarefas:", error);
+        localStorage.removeItem("todoList"); // limpa dados corrompidos
+      }
+    }
+  }, []);
+
+  // Salvar tarefas no localStorage sempre que mudar
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(list));
+  }, [list]);
 
   const handleAddTask = (taskName: string) => {
-    let newList = [...list];
-    newList.push({
-      id: list.length + 1,
+    const newTask: Item = {
+      id: new Date().getTime(),
       name: taskName,
       done: false,
-    });
-    setList(newList);
+      createdAt: new Date().toISOString(),
+    };
+
+    setList((prevList) => [...prevList, newTask]);
   };
 
   const handleTaskChange = (id: number, done: boolean) => {
-    let newList = [...list];
-    for (let i in newList) {
-      if (newList[i].id === id) {
-        newList[i].done = done;
-      }
-    }
+    const newList = list.map((item) =>
+      item.id === id ? { ...item, done } : item
+    );
     setList(newList);
   };
 
@@ -37,8 +51,8 @@ const App = () => {
 
         <AddArea onEnter={handleAddTask} />
 
-        {list.map((item, index) => (
-          <ListItem key={index} item={item} onChange={handleTaskChange} />
+        {list.map((item) => (
+          <ListItem key={item.id} item={item} onChange={handleTaskChange} />
         ))}
       </C.Area>
     </C.Container>
