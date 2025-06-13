@@ -46,46 +46,41 @@ export const ListItem = ({ item, onChange, onRemove }: Props) => {
                   onRemove(item.id);
                   setConfirming(false);
                 }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  background: "#e74c3c",
+                  borderRadius: "8px",
+                  padding: "8px 16px",
+                  color: "#fff",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                  border: "none",
+                }}
               >
-                <button
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    border: 10,
-                    background: "#e74c1c",
-                    borderRadius: "8px",
-                    padding: "8px 16px",
-                    color: "#fff",
-                    fontWeight: "bold",
-                    cursor: "pointer",
-                  }}
-                >
-                  <Trash2 size={18} />
-                  Sim
-                </button>
+                <Trash2 size={18} />
+                Sim
               </C.ModalButton>
+
               <C.ModalButton
                 variant="cancel"
                 onClick={() => setConfirming(false)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  background: "#e74c3c",
+                  borderRadius: "8px",
+                  padding: "8px 16px",
+                  color: "#fff",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                  border: "none",
+                }}
               >
-                <button
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    border: 10,
-                    background: "#e74c3c",
-                    borderRadius: "8px",
-                    padding: "8px 16px",
-                    color: "#fff",
-                    fontWeight: "bold",
-                    cursor: "pointer",
-                  }}
-                >
-                  <X size={18} />
-                  Não
-                </button>
+                <X size={18} />
+                Não
               </C.ModalButton>
             </div>
           </C.Modal>
