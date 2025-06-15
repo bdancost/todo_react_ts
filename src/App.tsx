@@ -63,15 +63,21 @@ const App = () => {
           <button
             onClick={() => setDarkMode((prev) => !prev)}
             style={{
-              background: "none",
-              border: "none",
-              color: "#fff",
+              background: darkMode ? "#FFF" : "#333",
+              border: darkMode ? "1px solid #fff" : "1px solid #000",
+              borderRadius: "15px",
+              padding: "5px 10px",
+              color: "inherit",
               cursor: "pointer",
-              fontSize: "16px",
+              fontSize: "20px",
+              fontWeight: "bold",
               marginBottom: "10px",
+              marginTop: "10px",
+              transition:
+                "background-color 0.3s, color 0.3s, border-color 0.3s",
             }}
           >
-            {darkMode ? "🌞 Mudar para Claro" : "🌙 Mudar para Escuro"}
+            {darkMode ? "🌞" : "🌙"}
           </button>
           <AddArea onEnter={handleAddTask} />
           {list.map((item) => (
