@@ -1,46 +1,62 @@
-# Getting Started with Create React App
+# Todo List React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto é uma aplicação de lista de tarefas (Todo List) desenvolvida em React com TypeScript, utilizando Styled Components para estilização e persistência de dados no `localStorage`. O objetivo é fornecer uma experiência moderna, responsiva e com suporte a temas claro/escuro.
 
-## Available Scripts
+## Funcionalidades
 
-In the project directory, you can run:
+- Adicionar, marcar como concluída e remover tarefas
+- Confirmação visual antes de remover tarefas
+- Persistência automática das tarefas e do tema no navegador
+- Alternância entre tema claro e escuro
+- Interface responsiva e moderna
 
-### `npm start`
+## Tecnologias e Ferramentas Utilizadas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **React 19**: Biblioteca principal para construção da interface de usuário.
+- **TypeScript**: Tipagem estática para maior robustez e manutenção do código.
+- **Styled Components**: Estilização baseada em componentes, com suporte a temas dinâmicos.
+- **Lucide React**: Ícones SVG modernos e leves.
+- **Jest + Testing Library**: Testes unitários e de integração para componentes React.
+- **LocalStorage**: Persistência dos dados do usuário no navegador.
+- **Create React App**: Ferramenta de scaffolding para projetos React.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Instalação
 
-### `npm test`
+1. **Clone o repositório:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```sh
+   git clone https://github.com/bdancost/todo_react_ts.git
+   cd todo
 
-### `npm run build`
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Instale as dependências:
+   npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Inicie o servidor de desenvolvimento:
+   npm start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Acesse http://localhost:3000 no navegador.
 
-### `npm run eject`
+Scripts Disponíveis
+npm start: Inicia o servidor de desenvolvimento.
+npm run build: Gera a versão de produção na pasta build.
+npm test: Executa os testes automatizados.
+Como Usar
+Adicionar Tarefa: Digite o nome da tarefa e pressione Enter.
+Marcar como Concluída: Clique na caixa de seleção ao lado da tarefa.
+Remover Tarefa: Clique no ícone de lixeira e confirme a remoção.
+Alternar Tema: Use o botão no topo para alternar entre claro e escuro.
+Detalhes Técnicos
+O estado das tarefas é armazenado em um array de objetos do tipo Item.
+O tema é controlado via ThemeProvider do Styled Components, alternando entre lightTheme[ e ](http://_vscodecontentref_/6)darkTheme.
+A persistência é feita via localStorage, tanto para as tarefas quanto para a preferência de tema.
+O componente ListItem possui modal de confirmação para remoção, garantindo melhor UX.
+Testes
+Os testes estão localizados em arquivos .test.tsx e utilizam Testing Library para simular interações do usuário.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+npm test
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Personalização
+Temas: Edite App.styles.ts para alterar cores e estilos globais.
+Tipos: Modifique Item.ts para adicionar novos campos às tarefas.
