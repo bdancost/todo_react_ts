@@ -67,7 +67,7 @@ const App = () => {
               border: darkMode ? "1px solid #fff" : "1px solid #000",
               borderRadius: "15px",
               padding: "5px 10px",
-              color: "inherit",
+              color: darkMode ? "#000" : "#FFF",
               cursor: "pointer",
               fontSize: "20px",
               fontWeight: "bold",

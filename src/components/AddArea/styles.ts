@@ -10,12 +10,13 @@ export const Container = styled.div`
 
   .image {
     margin-right: 5px;
+    font-size: 15px;
+    color: ${(props) => props.theme.text};
   }
 
   input {
     border: 0px;
     background-color: transparent;
-    color: #fff;
     outline: 0;
     font-size: 18px;
     flex: 1;

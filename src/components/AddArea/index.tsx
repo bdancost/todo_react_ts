@@ -1,5 +1,6 @@
 import { useState, KeyboardEvent } from "react";
 import * as C from "./styles";
+import { Input } from "../../App.styles";
 
 type Props = {
   onEnter: (taskName: string) => void;
@@ -18,7 +19,7 @@ export const AddArea = ({ onEnter }: Props) => {
   return (
     <C.Container>
       <div className="image">╋</div>
-      <input
+      <Input
         type="text"
         placeholder="Adicionar tarefa"
         value={inputText}
