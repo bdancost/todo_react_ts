@@ -60,25 +60,30 @@ const App = () => {
       <C.Container>
         <C.Area>
           <C.Header>Lista de Tarefas</C.Header>
-          <button
-            onClick={() => setDarkMode((prev) => !prev)}
-            style={{
-              background: darkMode ? "#FFF" : "#333",
-              border: darkMode ? "1px solid #fff" : "1px solid #000",
-              borderRadius: "15px",
-              padding: "5px 10px",
-              color: darkMode ? "#000" : "#FFF",
-              cursor: "pointer",
-              fontSize: "20px",
-              fontWeight: "bold",
-              marginBottom: "10px",
-              marginTop: "10px",
-              transition:
-                "background-color 0.3s, color 0.3s, border-color 0.3s",
-            }}
-          >
-            {darkMode ? "🌞" : "🌙"}
-          </button>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <button
+              onClick={() => setDarkMode((prev) => !prev)}
+              style={{
+                display: "flex",
+                justifyContent: "end",
+                alignItems: "center",
+                background: darkMode ? "#FFF" : "#333",
+                border: darkMode ? "1px solid #fff" : "1px solid #000",
+                borderRadius: "15px",
+                padding: "5px 10px",
+                color: darkMode ? "#000" : "#FFF",
+                cursor: "pointer",
+                fontSize: "20px",
+                fontWeight: "bold",
+                marginBottom: "10px",
+                marginTop: "10px",
+                transition:
+                  "background-color 0.3s, color 0.3s, border-color 0.3s",
+              }}
+            >
+              {darkMode ? "🌞" : "🌙"}
+            </button>
+          </div>
           <AddArea onEnter={handleAddTask} />
           {list.map((item) => (
             <ListItem

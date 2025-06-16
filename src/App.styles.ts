@@ -38,7 +38,7 @@ export const Area = styled.div`
 `;
 
 export const Header = styled.h1`
-  margin: 0;
+  margin: 10px 0;
   padding: 0;
   color: ${(props) => props.theme.header};
   text-align: center;
