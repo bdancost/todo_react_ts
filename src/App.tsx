@@ -5,6 +5,7 @@ import { ListItem } from "./components/ListItem";
 import { AddArea } from "./components/AddArea";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyle } from "./App.styles";
+import { Sun, Moon } from "lucide-react";
 
 const App = () => {
   const [list, setList] = useState<Item[]>(() => {
@@ -81,7 +82,7 @@ const App = () => {
                   "background-color 0.3s, color 0.3s, border-color 0.3s",
               }}
             >
-              {darkMode ? "🌞" : "🌙"}
+              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
           </div>
           <AddArea onEnter={handleAddTask} />
