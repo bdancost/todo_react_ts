@@ -119,3 +119,15 @@ export const ModalButton = styled.button<{ variant?: "danger" | "cancel" }>`
     transform: scale(1.02);
   }
 `;
+
+// Dentro de styles.ts
+export const IconButton = styled.button`
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;

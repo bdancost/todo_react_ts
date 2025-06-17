@@ -55,6 +55,12 @@ const App = () => {
     setList(filteredList);
   };
 
+  const handleEditTask = (id: number, newName: string) => {
+    setList((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, name: newName } : item))
+    );
+  };
+
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <GlobalStyle />
@@ -92,6 +98,7 @@ const App = () => {
               item={item}
               onChange={handleTaskChange}
               onRemove={handleRemoveTask}
+              onEdit={handleEditTask}
             />
           ))}
         </C.Area>
