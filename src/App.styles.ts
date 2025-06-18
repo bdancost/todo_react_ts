@@ -2,17 +2,17 @@ import styled, { createGlobalStyle } from "styled-components";
 import { DefaultTheme } from "styled-components";
 
 export const lightTheme: DefaultTheme = {
-  background: "#f5f5f5",
-  text: "#333",
-  header: "#007bff",
+  background: "#f2f4f8",
+  text: "#1c1e21",
+  header: "#0d6efd",
   itemBackground: "#ffffff",
 };
 
 export const darkTheme: DefaultTheme = {
-  background: "#121212",
-  text: "#ffffff",
-  header: "#1e90ff",
-  itemBackground: "#1f1f1f",
+  background: "#0f1115",
+  text: "#e0e0e0",
+  header: "#00bcd4",
+  itemBackground: "#1e1e2f",
 };
 
 export const GlobalStyle = createGlobalStyle`
@@ -38,12 +38,14 @@ export const Area = styled.div`
 `;
 
 export const Header = styled.h1`
-  margin: 10px 0;
-  padding: 0;
-  color: ${(props) => props.theme.header};
-  text-align: center;
-  border-bottom: 1px solid #444;
-  padding-bottom: 20px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  background-color: ${({ theme }) => theme.header};
+  padding: 15px;
+  border-radius: 12px;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 `;
 
 export const Input = styled.input`

@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import * as C from "./App.styles";
 import { Item } from "./types/Item";
@@ -5,7 +6,7 @@ import { ListItem } from "./components/ListItem";
 import { AddArea } from "./components/AddArea";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyle } from "./App.styles";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, ListTodo } from "lucide-react";
 
 const App = () => {
   const [list, setList] = useState<Item[]>(() => {
@@ -66,7 +67,14 @@ const App = () => {
       <GlobalStyle />
       <C.Container>
         <C.Area>
-          <C.Header>Lista de Tarefas</C.Header>
+          <C.Header>
+            <ListTodo
+              size={30}
+              color="#FFF"
+              style={{ marginRight: "5px", marginTop: "5px" }}
+            />
+            &nbsp; Lista de Tarefas
+          </C.Header>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <button
               onClick={() => setDarkMode((prev) => !prev)}
@@ -74,8 +82,8 @@ const App = () => {
                 display: "flex",
                 justifyContent: "end",
                 alignItems: "center",
-                background: darkMode ? "#FFF" : "#333",
-                border: darkMode ? "1px solid #fff" : "1px solid #000",
+                background: darkMode ? "#333" : "#333",
+                border: darkMode ? "1px solid #FFF" : "1px solid #000",
                 borderRadius: "15px",
                 padding: "5px 10px",
                 color: darkMode ? "#000" : "#FFF",
@@ -88,7 +96,11 @@ const App = () => {
                   "background-color 0.3s, color 0.3s, border-color 0.3s",
               }}
             >
-              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+              {darkMode ? (
+                <Sun color="#f1c40f" size={20} />
+              ) : (
+                <Moon size={20} />
+              )}
             </button>
           </div>
           <AddArea onEnter={handleAddTask} />
