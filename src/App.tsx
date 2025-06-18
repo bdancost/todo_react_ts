@@ -1,32 +1,24 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { ThemeProvider } from "styled-components";
+import { Sun, Moon, ListTodo } from "lucide-react";
+
 import * as C from "./App.styles";
 import { Item } from "./types/Item";
 import { ListItem } from "./components/ListItem";
 import { AddArea } from "./components/AddArea";
-import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyle } from "./App.styles";
-import { Sun, Moon, ListTodo } from "lucide-react";
 
 const App = () => {
   const [list, setList] = useState<Item[]>(() => {
     const saved = localStorage.getItem("todoList");
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch (e) {
-        console.error("Erro ao fazer parse do localStorage:", e);
-        return [];
-      }
-    }
-    return [];
+    return saved ? JSON.parse(saved) : [];
   });
 
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem("darkMode") === "true";
   });
 
-  // Salva sempre que mudar
+  // Persistência no localStorage
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(list));
   }, [list]);
@@ -35,9 +27,10 @@ const App = () => {
     localStorage.setItem("darkMode", String(darkMode));
   }, [darkMode]);
 
+  // Manipulação das tarefas
   const handleAddTask = (taskName: string) => {
     const newTask: Item = {
-      id: new Date().getTime(),
+      id: Date.now(),
       name: taskName,
       done: false,
       createdAt: new Date().toISOString(),
@@ -52,8 +45,7 @@ const App = () => {
   };
 
   const handleRemoveTask = (id: number) => {
-    const filteredList = list.filter((item) => item.id !== id);
-    setList(filteredList);
+    setList((prev) => prev.filter((item) => item.id !== id));
   };
 
   const handleEditTask = (id: number, newName: string) => {
@@ -70,39 +62,20 @@ const App = () => {
           <C.Header>
             <ListTodo
               size={30}
-              color="#FFF"
-              style={{ marginRight: "5px", marginTop: "5px" }}
+              color="#fff"
+              style={{ marginRight: "10px", marginTop: "4px" }}
             />
-            &nbsp; Lista de Tarefas
+            Lista de Tarefas
           </C.Header>
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <button
-              onClick={() => setDarkMode((prev) => !prev)}
-              style={{
-                display: "flex",
-                justifyContent: "end",
-                alignItems: "center",
-                background: darkMode ? "#333" : "#333",
-                border: darkMode ? "1px solid #FFF" : "1px solid #000",
-                borderRadius: "15px",
-                padding: "5px 10px",
-                color: darkMode ? "#000" : "#FFF",
-                cursor: "pointer",
-                fontSize: "20px",
-                fontWeight: "bold",
-                marginBottom: "10px",
-                marginTop: "10px",
-                transition:
-                  "background-color 0.3s, color 0.3s, border-color 0.3s",
-              }}
-            >
-              {darkMode ? (
-                <Sun color="#f1c40f" size={20} />
-              ) : (
-                <Moon size={20} />
-              )}
-            </button>
-          </div>
+
+          <C.ToggleThemeButton onClick={() => setDarkMode((prev) => !prev)}>
+            {darkMode ? (
+              <Sun color="#f1c40f" size={20} />
+            ) : (
+              <Moon color="#333" size={20} />
+            )}
+          </C.ToggleThemeButton>
+
           <AddArea onEnter={handleAddTask} />
           {list.map((item) => (
             <ListItem

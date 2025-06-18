@@ -2,6 +2,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import { DefaultTheme } from "styled-components";
 
 export const lightTheme: DefaultTheme = {
+  mode: "light",
   background: "#f2f4f8",
   text: "#1c1e21",
   header: "#0d6efd",
@@ -9,9 +10,10 @@ export const lightTheme: DefaultTheme = {
 };
 
 export const darkTheme: DefaultTheme = {
+  mode: "dark",
   background: "#0f1115",
   text: "#e0e0e0",
-  header: "#00bcd4",
+  header: "#27ae60",
   itemBackground: "#1e1e2f",
 };
 
@@ -61,5 +63,28 @@ export const Input = styled.input`
   ::placeholder {
     color: ${(props) => props.theme.text};
     opacity: 0.6;
+  }
+`;
+
+export const ToggleThemeButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: ${({ theme }) => (theme.mode === "dark" ? "#1f1f1f" : "#ffffff")};
+  border: 1px solid ${({ theme }) => (theme.mode === "dark" ? "#555" : "#ccc")};
+  border-radius: 15px;
+  padding: 6px 12px;
+  color: ${({ theme }) => (theme.mode === "dark" ? "#eee" : "#333")};
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+  align-self: flex-end;
+  transition: all 0.3s;
+
+  &:hover {
+    background: ${({ theme }) =>
+      theme.mode === "dark" ? "#2c2c2c" : "#f0f0f0"};
+    opacity: 0.9;
   }
 `;
