@@ -67,6 +67,10 @@ export const Input = styled.input`
 `;
 
 export const ToggleThemeButton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,13 +82,21 @@ export const ToggleThemeButton = styled.button`
   cursor: pointer;
   font-size: 18px;
   font-weight: bold;
-  margin: 10px 0;
-  align-self: flex-end;
+  z-index: 10;
   transition: all 0.3s;
 
   &:hover {
     background: ${({ theme }) =>
       theme.mode === "dark" ? "#2c2c2c" : "#f0f0f0"};
     opacity: 0.9;
+  }
+
+  // Quando a tela for menor que 768px, muda o estilo:
+  @media (max-width: 768px) {
+    position: static;
+    margin-left: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
   }
 `;

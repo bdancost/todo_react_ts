@@ -58,6 +58,14 @@ const App = () => {
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <GlobalStyle />
       <C.Container>
+        <C.ToggleThemeButton onClick={() => setDarkMode((prev) => !prev)}>
+          {darkMode ? (
+            <Sun color="#f1c40f" size={20} />
+          ) : (
+            <Moon color="#333" size={20} />
+          )}
+        </C.ToggleThemeButton>
+
         <C.Area>
           <C.Header>
             <ListTodo
@@ -67,14 +75,6 @@ const App = () => {
             />
             Lista de Tarefas
           </C.Header>
-
-          <C.ToggleThemeButton onClick={() => setDarkMode((prev) => !prev)}>
-            {darkMode ? (
-              <Sun color="#f1c40f" size={20} />
-            ) : (
-              <Moon color="#333" size={20} />
-            )}
-          </C.ToggleThemeButton>
 
           <AddArea onEnter={handleAddTask} />
           {list.map((item) => (
