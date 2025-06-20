@@ -18,6 +18,21 @@ const App = () => {
     return localStorage.getItem("darkMode") === "true";
   });
 
+  const [filtro, setFiltro] = useState<"todas" | "pendentes" | "concluidas">(
+    "todas"
+  );
+
+  const getListaFiltrada = () => {
+    switch (filtro) {
+      case "pendentes":
+        return list.filter((item) => !item.done);
+      case "concluidas":
+        return list.filter((item) => item.done);
+      default:
+        return list;
+    }
+  };
+
   // Persistência no localStorage
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(list));
@@ -76,8 +91,29 @@ const App = () => {
             Lista de Tarefas
           </C.Header>
 
+          <C.Filtros>
+            <button
+              className={filtro === "todas" ? "ativo" : ""}
+              onClick={() => setFiltro("todas")}
+            >
+              Todas
+            </button>
+            <button
+              className={filtro === "pendentes" ? "ativo" : ""}
+              onClick={() => setFiltro("pendentes")}
+            >
+              Pendentes
+            </button>
+            <button
+              className={filtro === "concluidas" ? "ativo" : ""}
+              onClick={() => setFiltro("concluidas")}
+            >
+              Concluídas
+            </button>
+          </C.Filtros>
+
           <AddArea onEnter={handleAddTask} />
-          {list.map((item) => (
+          {getListaFiltrada().map((item) => (
             <ListItem
               key={item.id}
               item={item}
