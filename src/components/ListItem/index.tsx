@@ -33,9 +33,9 @@ export const ListItem = ({ item, onChange, onRemove, onEdit }: Props) => {
         checked={item.done}
         onChange={(e) => onChange(item.id, e.target.checked)}
       />
-      <div style={{ flex: 1 }}>
+      <C.TaskContent>
         {isEditing ? (
-          <input
+          <C.EditInput
             type="text"
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
@@ -46,24 +46,17 @@ export const ListItem = ({ item, onChange, onRemove, onEdit }: Props) => {
                 setNewName(item.name);
               }
             }}
-            style={{
-              padding: "6px",
-              fontSize: "16px",
-              width: "100%",
-              borderRadius: "8px",
-              border: "1px solid #ccc",
-            }}
             autoFocus
           />
         ) : (
           <>
             <label>{item.name}</label>
-            <div style={{ fontSize: "12px", color: "#888" }}>
+            <div className="createdAt">
               Criado em: {formatDate(item.createdAt)}
             </div>
           </>
         )}
-      </div>
+      </C.TaskContent>
 
       {isEditing ? (
         <button onClick={handleSaveEdit} title="Salvar edição">
@@ -98,18 +91,6 @@ export const ListItem = ({ item, onChange, onRemove, onEdit }: Props) => {
                   onRemove(item.id);
                   setConfirming(false);
                 }}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  background: "#e74c3c",
-                  borderRadius: "8px",
-                  padding: "8px 16px",
-                  color: "#fff",
-                  fontWeight: "bold",
-                  cursor: "pointer",
-                  border: "none",
-                }}
               >
                 <Trash2 size={18} />
                 Sim
@@ -118,18 +99,6 @@ export const ListItem = ({ item, onChange, onRemove, onEdit }: Props) => {
               <C.ModalButton
                 variant="cancel"
                 onClick={() => setConfirming(false)}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  background: "#e74c3c",
-                  borderRadius: "8px",
-                  padding: "8px 16px",
-                  color: "#fff",
-                  fontWeight: "bold",
-                  cursor: "pointer",
-                  border: "none",
-                }}
               >
                 <X size={18} />
                 Não

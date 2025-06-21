@@ -131,3 +131,29 @@ export const IconButton = styled.button`
     opacity: 0.8;
   }
 `;
+
+export const TaskContent = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  label {
+    font-size: 16px;
+    color: #ccc;
+    word-break: break-word;
+  }
+
+  .createdAt {
+    font-size: 12px;
+    color: #888;
+  }
+`;
+
+export const EditInput = styled.input`
+  padding: 6px;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+`;
