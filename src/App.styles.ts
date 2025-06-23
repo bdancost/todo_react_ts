@@ -133,12 +133,12 @@ export const TopBar = styled.div`
 `;
 
 export const LangSelect = styled.select`
-  padding: 4px 6px;
-  border-radius: 6px;
-  border: 1px solid ${({ theme }) => theme.text};
+  padding: 6px 12px;
+  border-radius: 15px;
+  border: 1px solid ${({ theme }) => (theme.mode === "dark" ? "#555" : "#ccc")};
   background: transparent;
   color: ${({ theme }) => theme.text};
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
 
   option {
