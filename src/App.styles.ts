@@ -67,10 +67,6 @@ export const Input = styled.input`
 `;
 
 export const ToggleThemeButton = styled.button`
-  position: absolute;
-  top: 20px;
-  right: 20px;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,7 +78,6 @@ export const ToggleThemeButton = styled.button`
   cursor: pointer;
   font-size: 18px;
   font-weight: bold;
-  z-index: 10;
   transition: all 0.3s;
 
   &:hover {
@@ -91,13 +86,9 @@ export const ToggleThemeButton = styled.button`
     opacity: 0.9;
   }
 
-  // Quando a tela for menor que 768px, muda o estilo:
   @media (max-width: 768px) {
-    position: static;
-    margin-left: auto;
     margin-top: 10px;
     margin-bottom: 10px;
-    margin-right: 10px;
   }
 `;
 
@@ -124,5 +115,33 @@ export const Filtros = styled.div`
     &:hover {
       opacity: 0.8;
     }
+  }
+`;
+
+export const TopBar = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+`;
+
+export const LangSelect = styled.select`
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid ${({ theme }) => theme.text};
+  background: transparent;
+  color: ${({ theme }) => theme.text};
+  font-size: 14px;
+  cursor: pointer;
+
+  option {
+    color: black;
   }
 `;

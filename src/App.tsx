@@ -7,8 +7,14 @@ import { Item } from "./types/Item";
 import { ListItem } from "./components/ListItem";
 import { AddArea } from "./components/AddArea";
 import { lightTheme, darkTheme, GlobalStyle } from "./App.styles";
+import { translations, Idioma } from "./i18n/translations";
 
 const App = () => {
+  const [idioma, setIdioma] = useState<Idioma>(() => {
+    return (localStorage.getItem("idioma") as Idioma) || "pt";
+  });
+  const t = translations[idioma];
+
   const [list, setList] = useState<Item[]>(() => {
     const saved = localStorage.getItem("todoList");
     return saved ? JSON.parse(saved) : [];
@@ -42,6 +48,10 @@ const App = () => {
     localStorage.setItem("darkMode", String(darkMode));
   }, [darkMode]);
 
+  useEffect(() => {
+    localStorage.setItem("idioma", idioma);
+  }, [idioma]);
+
   // Manipulação das tarefas
   const handleAddTask = (taskName: string) => {
     const newTask: Item = {
@@ -73,13 +83,24 @@ const App = () => {
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <GlobalStyle />
       <C.Container>
-        <C.ToggleThemeButton onClick={() => setDarkMode((prev) => !prev)}>
-          {darkMode ? (
-            <Sun color="#f1c40f" size={20} />
-          ) : (
-            <Moon color="#333" size={20} />
-          )}
-        </C.ToggleThemeButton>
+        <C.TopBar>
+          <C.ToggleThemeButton onClick={() => setDarkMode((prev) => !prev)}>
+            {darkMode ? (
+              <Sun color="#f1c40f" size={20} />
+            ) : (
+              <Moon color="#333" size={20} />
+            )}
+          </C.ToggleThemeButton>
+
+          <C.LangSelect
+            value={idioma}
+            onChange={(e) => setIdioma(e.target.value as Idioma)}
+          >
+            <option value="pt">🇧🇷</option>
+            <option value="en">🇺🇸</option>
+            <option value="es">🇪🇸</option>
+          </C.LangSelect>
+        </C.TopBar>
 
         <C.Area>
           <C.Header>
@@ -88,7 +109,7 @@ const App = () => {
               color="#fff"
               style={{ marginRight: "10px", marginTop: "4px" }}
             />
-            Lista de Tarefas
+            {t.title}
           </C.Header>
 
           <C.Filtros>
@@ -120,6 +141,7 @@ const App = () => {
               onChange={handleTaskChange}
               onRemove={handleRemoveTask}
               onEdit={handleEditTask}
+              t={t}
             />
           ))}
         </C.Area>

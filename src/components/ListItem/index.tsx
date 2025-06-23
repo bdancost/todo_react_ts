@@ -2,15 +2,17 @@ import { useState } from "react";
 import * as C from "./styles";
 import { Item } from "../../types/Item";
 import { Trash2, X, Pencil, Check } from "lucide-react";
+import { translations } from "../../i18n/translations";
 
 type Props = {
   item: Item;
   onChange: (id: number, done: boolean) => void;
   onRemove: (id: number) => void;
   onEdit: (id: number, newName: string) => void;
+  t: (typeof translations)["pt"];
 };
 
-export const ListItem = ({ item, onChange, onRemove, onEdit }: Props) => {
+export const ListItem = ({ item, onChange, onRemove, onEdit, t }: Props) => {
   const [confirming, setConfirming] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(item.name);
@@ -52,7 +54,7 @@ export const ListItem = ({ item, onChange, onRemove, onEdit }: Props) => {
           <>
             <label>{item.name}</label>
             <div className="createdAt">
-              Criado em: {formatDate(item.createdAt)}
+              {t.createdAt}: {formatDate(item.createdAt)}
             </div>
           </>
         )}
@@ -82,8 +84,8 @@ export const ListItem = ({ item, onChange, onRemove, onEdit }: Props) => {
         <C.Overlay>
           <C.Modal>
             <div className="icon">🗑️</div>
-            <h2>Remover Tarefa</h2>
-            <p>Você tem certeza que deseja remover esta tarefa da lista?</p>
+            <h2>{t.removeTitle}</h2>
+            <p>{t.removeConfirm}</p>
             <div className="buttons">
               <C.ModalButton
                 variant="danger"
@@ -93,7 +95,7 @@ export const ListItem = ({ item, onChange, onRemove, onEdit }: Props) => {
                 }}
               >
                 <Trash2 size={18} />
-                Sim
+                {t.btnYes}
               </C.ModalButton>
 
               <C.ModalButton
@@ -101,7 +103,7 @@ export const ListItem = ({ item, onChange, onRemove, onEdit }: Props) => {
                 onClick={() => setConfirming(false)}
               >
                 <X size={18} />
-                Não
+                {t.btnNo}
               </C.ModalButton>
             </div>
           </C.Modal>
