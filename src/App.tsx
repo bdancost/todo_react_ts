@@ -8,6 +8,7 @@ import { ListItem } from "./components/ListItem";
 import { AddArea } from "./components/AddArea";
 import { lightTheme, darkTheme, GlobalStyle } from "./App.styles";
 import { translations, Idioma } from "./i18n/translations";
+import { FiltroArea } from "./components/FiltroArea";
 
 const App = () => {
   const [idioma, setIdioma] = useState<Idioma>(() => {
@@ -112,26 +113,7 @@ const App = () => {
             {t.title}
           </C.Header>
 
-          <C.Filtros>
-            <button
-              className={filtro === "todas" ? "ativo" : ""}
-              onClick={() => setFiltro("todas")}
-            >
-              {t.all}
-            </button>
-            <button
-              className={filtro === "pendentes" ? "ativo" : ""}
-              onClick={() => setFiltro("pendentes")}
-            >
-              {t.pending}
-            </button>
-            <button
-              className={filtro === "concluidas" ? "ativo" : ""}
-              onClick={() => setFiltro("concluidas")}
-            >
-              {t.done}
-            </button>
-          </C.Filtros>
+          <FiltroArea filtro={filtro} setFiltro={setFiltro} t={t} />
 
           <AddArea onEnter={handleAddTask} t={t} />
           {getListaFiltrada().map((item) => (
