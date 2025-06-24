@@ -2,7 +2,20 @@
 
 export type Idioma = "pt" | "en" | "es";
 
-export const translations = {
+type Translation = {
+  title: string;
+  createdAt: string;
+  removeConfirm: string;
+  removeTitle: string;
+  btnYes: string;
+  btnNo: string;
+  placeholder: string;
+  all: string;
+  pending: string;
+  done: string;
+};
+
+export const translations: Record<Idioma, Translation> = {
   pt: {
     title: "Lista de Tarefas",
     createdAt: "Criado em",
@@ -10,6 +23,10 @@ export const translations = {
     removeTitle: "Remover Tarefa",
     btnYes: "Sim",
     btnNo: "Não",
+    placeholder: "Adicionar tarefa",
+    all: "Todas",
+    pending: "Pendentes",
+    done: "Concluídas",
   },
   en: {
     title: "Task List",
@@ -18,6 +35,10 @@ export const translations = {
     removeTitle: "Delete Task",
     btnYes: "Yes",
     btnNo: "No",
+    placeholder: "Add task",
+    all: "All",
+    pending: "Pending",
+    done: "Completed",
   },
   es: {
     title: "Lista de Tareas",
@@ -26,5 +47,9 @@ export const translations = {
     removeTitle: "Eliminar Tarea",
     btnYes: "Sí",
     btnNo: "No",
+    placeholder: "Agregar tarea",
+    all: "Todas",
+    pending: "Pendientes",
+    done: "Completadas",
   },
 };

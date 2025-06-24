@@ -117,23 +117,23 @@ const App = () => {
               className={filtro === "todas" ? "ativo" : ""}
               onClick={() => setFiltro("todas")}
             >
-              Todas
+              {t.all}
             </button>
             <button
               className={filtro === "pendentes" ? "ativo" : ""}
               onClick={() => setFiltro("pendentes")}
             >
-              Pendentes
+              {t.pending}
             </button>
             <button
               className={filtro === "concluidas" ? "ativo" : ""}
               onClick={() => setFiltro("concluidas")}
             >
-              Concluídas
+              {t.done}
             </button>
           </C.Filtros>
 
-          <AddArea onEnter={handleAddTask} />
+          <AddArea onEnter={handleAddTask} t={t} />
           {getListaFiltrada().map((item) => (
             <ListItem
               key={item.id}

@@ -4,9 +4,12 @@ import { Input } from "../../App.styles";
 
 type Props = {
   onEnter: (taskName: string) => void;
+  t: {
+    placeholder: string;
+  };
 };
 
-export const AddArea = ({ onEnter }: Props) => {
+export const AddArea = ({ onEnter, t }: Props) => {
   const [inputText, setInputText] = useState("");
 
   const handleKeyUp = (e: KeyboardEvent) => {
@@ -21,7 +24,7 @@ export const AddArea = ({ onEnter }: Props) => {
       <div className="image">╋</div>
       <Input
         type="text"
-        placeholder="Adicionar tarefa"
+        placeholder={t.placeholder}
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
         onKeyUp={handleKeyUp}
