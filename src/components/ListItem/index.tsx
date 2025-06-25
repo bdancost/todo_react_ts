@@ -39,6 +39,7 @@ export const ListItem = ({ item, onChange, onRemove, onEdit, t }: Props) => {
       <C.TaskContent>
         {isEditing ? (
           <Input
+            type="text"
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
             onKeyDown={(e) => {

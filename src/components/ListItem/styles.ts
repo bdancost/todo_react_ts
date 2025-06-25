@@ -13,10 +13,21 @@ export const Container = styled.div<ContainerProps>`
   margin-bottom: 10px;
   align-items: center;
 
-  input [type="checkbox"] {
-    width: 25px;
-    height: 25px;
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
     margin-right: 10px;
+  }
+
+  input[type="text"] {
+    flex: 1;
+    font-size: 16px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: transparent;
+    color: ${({ theme }) => theme.text};
   }
 
   label {
