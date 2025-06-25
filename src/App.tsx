@@ -113,7 +113,7 @@ const App = () => {
             {t.title}
           </C.Header>
 
-          <FiltroArea filtro={filtro} setFiltro={setFiltro} t={t} />
+          <FiltroArea filtro={filtro} setFiltro={setFiltro} t={t} list={list} />
 
           <AddArea onEnter={handleAddTask} t={t} />
           {getListaFiltrada().map((item) => (
