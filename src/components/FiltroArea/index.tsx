@@ -19,19 +19,19 @@ export const FiltroArea = ({ filtro, setFiltro, t, list }: Props) => {
         className={filtro === "todas" ? "ativo" : ""}
         onClick={() => setFiltro("todas")}
       >
-        {t.all} ({totalTarefas})
+        {t.all} <span className="badge">({totalTarefas})</span>
       </button>
       <button
         className={filtro === "pendentes" ? "ativo" : ""}
         onClick={() => setFiltro("pendentes")}
       >
-        {t.pending} ({pendentes})
+        {t.pending} <span className="badge pending">({pendentes})</span>
       </button>
       <button
         className={filtro === "concluidas" ? "ativo" : ""}
         onClick={() => setFiltro("concluidas")}
       >
-        {t.done} ({concluidas})
+        {t.done} <span className="badge done">({concluidas})</span>
       </button>
     </C.Container>
   );

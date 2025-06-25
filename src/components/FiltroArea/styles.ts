@@ -23,5 +23,23 @@ export const Container = styled.div`
     &:hover {
       opacity: 0.8;
     }
+
+    .badge {
+      background-color: #ddd;
+      color: #333;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 999px;
+    }
+
+    .badge.pending {
+      background-color: #f39c12;
+      color: #fff;
+    }
+
+    .badge.done {
+      background-color: #2ecc71;
+      color: #fff;
+    }
   }
 `;
