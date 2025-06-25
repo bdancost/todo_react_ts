@@ -62,8 +62,8 @@ export const Input = styled.input`
   transition: background-color 0.3s, color 0.3s;
 
   ::placeholder {
-    color: ${(props) => props.theme.text};
-    opacity: 0.6;
+    color: ${({ theme }) => (theme.mode === "light" ? "#666" : "#aaa")};
+    opacity: 1;
   }
 `;
 

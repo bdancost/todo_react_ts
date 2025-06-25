@@ -27,11 +27,16 @@ export const Container = styled.div<ContainerProps>`
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: transparent;
-    color: ${({ theme }) => theme.text};
+    color: ${({ theme }) => (theme.mode === "light" ? "#222" : theme.text)};
+
+    ::placeholder {
+      color: ${({ theme }) => (theme.mode === "light" ? "#666" : "#aaa")};
+      opacity: 1;
+    }
   }
 
   label {
-    color: #ccc;
+    color: ${({ theme }) => (theme.mode === "light" ? "#222" : "#ccc")};
     text-decoration: ${(props) => (props.$done ? "line-through" : "initial")};
   }
 
@@ -151,7 +156,7 @@ export const TaskContent = styled.div`
 
   label {
     font-size: 16px;
-    color: #ccc;
+    color: ${({ theme }) => (theme.mode === "light" ? "#222" : "#ccc")};
     word-break: break-word;
   }
 
