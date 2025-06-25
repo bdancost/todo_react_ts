@@ -3,6 +3,7 @@ import * as C from "./styles";
 import { Item } from "../../types/Item";
 import { Trash2, X, Pencil, Check } from "lucide-react";
 import { translations } from "../../i18n/translations";
+import { Input } from "../../App.styles";
 
 type Props = {
   item: Item;
@@ -37,8 +38,7 @@ export const ListItem = ({ item, onChange, onRemove, onEdit, t }: Props) => {
       />
       <C.TaskContent>
         {isEditing ? (
-          <C.EditInput
-            type="text"
+          <Input
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
             onKeyDown={(e) => {

@@ -7,13 +7,13 @@ type ContainerProps = {
 
 export const Container = styled.div<ContainerProps>`
   display: flex;
-  background-color: #20212c;
+  background-color: ${({ theme }) => theme.itemBackground};
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
   align-items: center;
 
-  input {
+  input [type="checkbox"] {
     width: 25px;
     height: 25px;
     margin-right: 10px;
@@ -148,12 +148,4 @@ export const TaskContent = styled.div`
     font-size: 12px;
     color: #888;
   }
-`;
-
-export const EditInput = styled.input`
-  padding: 6px;
-  font-size: 16px;
-  width: 100%;
-  border-radius: 8px;
-  border: 1px solid #ccc;
 `;
