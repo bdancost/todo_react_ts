@@ -11,6 +11,8 @@
     "@types/node": "^16.18.126",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.6",
+    "canvas-confetti": "^1.9.3",
+    "framer-motion": "^12.19.1",
     "lucide-react": "^0.514.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -45,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
     "@types/styled-components": "^5.1.34"
   }
 }

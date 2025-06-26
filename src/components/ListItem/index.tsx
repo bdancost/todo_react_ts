@@ -1,9 +1,11 @@
 import { useState } from "react";
 import * as C from "./styles";
 import { Item } from "../../types/Item";
-import { Trash2, X, Pencil, Check } from "lucide-react";
+import { Trash2, X, Pencil, Check, CheckCircle } from "lucide-react";
 import { translations } from "../../i18n/translations";
 import { Input } from "../../App.styles";
+import { motion, AnimatePresence } from "framer-motion";
+import confetti from "canvas-confetti";
 
 type Props = {
   item: Item;
@@ -29,12 +31,49 @@ export const ListItem = ({ item, onChange, onRemove, onEdit, t }: Props) => {
     const date = new Date(isoDate);
     return date.toLocaleDateString("pt-BR");
   };
+
+  const checkVariants = {
+    hidden: { scale: 0, opacity: 0, rotate: -90 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      rotate: 0,
+      transition: { type: "spring" as const, stiffness: 300, damping: 20 },
+    },
+    exit: { scale: 0, opacity: 0, rotate: 90, transition: { duration: 0.2 } },
+  };
+
+  const showConfetti = () => {
+    confetti({
+      particleCount: 80,
+      spread: 60,
+      origin: { y: 0.6 },
+    });
+  };
+
+  const playSound = () => {
+    const audio = new Audio("/sounds/check.mp3");
+    audio.volume = 0.4; // Ajuste o volume conforme necessário
+    audio.play();
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    onChange(item.id, checked);
+
+    // Se a tarefa acabou de ser marcada como concluída
+    if (!item.done && checked) {
+      playSound();
+      showConfetti();
+    }
+  };
+
   return (
     <C.Container $done={item.done}>
       <input
         type="checkbox"
         checked={item.done}
-        onChange={(e) => onChange(item.id, e.target.checked)}
+        onChange={handleCheckboxChange}
       />
       <C.TaskContent>
         {isEditing ? (
@@ -59,6 +98,25 @@ export const ListItem = ({ item, onChange, onRemove, onEdit, t }: Props) => {
             </div>
           </>
         )}
+
+        <AnimatePresence>
+          {item.done && (
+            <motion.div
+              key="check"
+              variants={checkVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginTop: "4px",
+              }}
+            >
+              <CheckCircle color="#2ecc71" size={22} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </C.TaskContent>
 
       {isEditing ? (
