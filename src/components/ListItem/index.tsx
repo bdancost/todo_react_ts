@@ -44,11 +44,30 @@ export const ListItem = ({ item, onChange, onRemove, onEdit, t }: Props) => {
   };
 
   const showConfetti = () => {
-    confetti({
-      particleCount: 80,
-      spread: 60,
-      origin: { y: 0.6 },
-    });
+    const duration = 800;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
+
+    const interval: any = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        return;
+      }
+
+      const randomInRange = (min: number, max: number) =>
+        Math.random() * (max - min) + min;
+
+      confetti({
+        ...defaults,
+        particleCount: 40,
+        origin: {
+          x: randomInRange(0.1, 0.9), // horizontal: espalhado
+          y: Math.random() * 0.4, // vertical: sobe de vários pontos
+        },
+      });
+    }, 150);
   };
 
   const playSound = () => {
