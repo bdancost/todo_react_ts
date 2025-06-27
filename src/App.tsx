@@ -9,6 +9,7 @@ import { AddArea } from "./components/AddArea";
 import { lightTheme, darkTheme, GlobalStyle } from "./App.styles";
 import { translations, Idioma } from "./i18n/translations";
 import { FiltroArea } from "./components/FiltroArea";
+import { Dashboard } from "./components/Dashboards/Dashboard";
 
 const App = () => {
   const [idioma, setIdioma] = useState<Idioma>(() => {
@@ -128,6 +129,7 @@ const App = () => {
           ))}
         </C.Area>
       </C.Container>
+      {list.length > 0 && <Dashboard list={list} />}
     </ThemeProvider>
   );
 };
