@@ -8,6 +8,13 @@ import {
   CartesianGrid,
 } from "recharts";
 import { Item } from "../../types/Item";
+import { LabelList } from "recharts";
+
+// Função para obter o dia da semana a partir da data
+const getDiaDaSemana = (dataStr: string, locale = "pt-BR") => {
+  const date = new Date(dataStr);
+  return date.toLocaleDateString(locale, { weekday: "short" }); // Ex: "seg.", "ter."
+};
 
 type Props = {
   list: Item[];
@@ -60,7 +67,8 @@ export const Dashboard = ({ list }: Props) => {
 
   list.forEach((item) => {
     if (item.done) {
-      const date = new Date(item.createdAt).toLocaleDateString("pt-BR");
+      const date = new Date(item.createdAt).toISOString().split("T")[0]; // ✅ "2024-06-24"
+
       if (!dataMap[date]) {
         dataMap[date] = { count: 0, tarefas: [] };
       }
@@ -69,11 +77,14 @@ export const Dashboard = ({ list }: Props) => {
     }
   });
 
-  const chartData: DayData[] = Object.entries(dataMap).map(([date, obj]) => ({
-    date,
-    concluídas: obj.count,
-    tarefas: obj.tarefas,
-  }));
+  const chartData: DayData[] = Object.entries(dataMap).map(([date, obj]) => {
+    const dia = getDiaDaSemana(date); // Ex: "seg."
+    return {
+      date: `${dia} - ${date}`, // Ex: "seg. - 24/06/2024"
+      concluídas: obj.count,
+      tarefas: obj.tarefas,
+    };
+  });
 
   return (
     <div style={{ width: "100%", height: 300, marginTop: 40 }}>
@@ -81,10 +92,17 @@ export const Dashboard = ({ list }: Props) => {
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis allowDecimals={false} />
+          <XAxis dataKey="date" stroke="#333" />
+          <YAxis allowDecimals={false} stroke="#333" />
           <Tooltip content={<CustomTooltip />} />
-          <Bar dataKey="concluídas" fill="#2ecc71" />
+          <Bar dataKey="concluídas" fill="#2ecc71">
+            <LabelList
+              dataKey="concluídas"
+              position="top"
+              fill="#222"
+              fontSize={14}
+            />
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </div>
