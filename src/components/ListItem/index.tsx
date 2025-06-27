@@ -9,9 +9,9 @@ import confetti from "canvas-confetti";
 
 type Props = {
   item: Item;
-  onChange: (id: number, done: boolean) => void;
-  onRemove: (id: number) => void;
-  onEdit: (id: number, newName: string) => void;
+  onChange: (id: string, done: boolean) => void;
+  onRemove: (id: string) => void;
+  onEdit: (id: string, newName: string) => void;
   t: (typeof translations)["pt"];
 };
 

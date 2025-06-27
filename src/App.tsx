@@ -10,8 +10,28 @@ import { lightTheme, darkTheme, GlobalStyle } from "./App.styles";
 import { translations, Idioma } from "./i18n/translations";
 import { FiltroArea } from "./components/FiltroArea";
 import { Dashboard } from "./components/Dashboards/Dashboard";
+import {
+  addTask,
+  getTasksByUser,
+  deleteTask,
+  updateTaskStatus,
+} from "./services/taskService";
+import { useAuth } from "./context/AuthContext";
 
 const App = () => {
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      if (user) {
+        const tasks = await getTasksByUser(user.uid);
+        setList(tasks);
+      }
+    };
+
+    fetchTasks();
+  }, [user]);
+
   const [idioma, setIdioma] = useState<Idioma>(() => {
     return (localStorage.getItem("idioma") as Idioma) || "pt";
   });
@@ -55,27 +75,43 @@ const App = () => {
   }, [idioma]);
 
   // Manipulação das tarefas
-  const handleAddTask = (taskName: string) => {
-    const newTask: Item = {
-      id: Date.now(),
-      name: taskName,
-      done: false,
-      createdAt: new Date().toISOString(),
-    };
-    setList((prev) => [...prev, newTask]);
+  const handleAddTask = async (taskName: string) => {
+    if (!user) {
+      alert("Você precisa estar logado para adicionar tarefas.");
+      return;
+    }
+
+    try {
+      const taskId = await addTask(taskName, user.uid);
+
+      const newTask: Item = {
+        id: taskId,
+        name: taskName,
+        done: false,
+        createdAt: new Date().toISOString(),
+      };
+
+      setList((prev) => [...prev, newTask]);
+    } catch (error) {
+      alert("Erro ao adicionar tarefa no Firestore.");
+      console.error(error);
+    }
   };
 
-  const handleTaskChange = (id: number, done: boolean) => {
+  const handleTaskChange = async (id: string, done: boolean) => {
     setList((prev) =>
       prev.map((item) => (item.id === id ? { ...item, done } : item))
     );
+
+    await updateTaskStatus(id, done);
   };
 
-  const handleRemoveTask = (id: number) => {
+  const handleRemoveTask = async (id: string) => {
     setList((prev) => prev.filter((item) => item.id !== id));
+    await deleteTask(id);
   };
 
-  const handleEditTask = (id: number, newName: string) => {
+  const handleEditTask = (id: string, newName: string) => {
     setList((prev) =>
       prev.map((item) => (item.id === id ? { ...item, name: newName } : item))
     );
