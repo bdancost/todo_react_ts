@@ -1,43 +1,43 @@
+// src/pages/Register.tsx
 import { useState } from "react";
+import { auth } from "../services/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
 
-export const Login = () => {
+export const Register = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setErro("");
 
     try {
-      await login(email, senha);
-      navigate("/"); // Redireciona para a página principal
+      await createUserWithEmailAndPassword(auth, email, senha);
+      navigate("/"); // redireciona para a home após o cadastro
     } catch (err: any) {
-      if (err.code === "auth/user-not-found") {
-        setErro("Usuário não encontrado.");
-      } else if (err.code === "auth/wrong-password") {
-        setErro("Senha incorreta.");
+      if (err.code === "auth/email-already-in-use") {
+        setErro("E-mail já está em uso.");
+      } else if (err.code === "auth/weak-password") {
+        setErro("Senha muito fraca. Use pelo menos 6 caracteres.");
       } else {
-        setErro("Erro ao fazer login.");
+        setErro("Erro ao registrar usuário.");
       }
     }
   };
 
   return (
     <div style={styles.container}>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin} style={styles.form}>
+      <h2>Cadastro</h2>
+      <form onSubmit={handleRegister} style={styles.form}>
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           style={styles.input}
-          required
         />
         <input
           type="password"
@@ -45,10 +45,9 @@ export const Login = () => {
           value={senha}
           onChange={(e) => setSenha(e.target.value)}
           style={styles.input}
-          required
         />
         <button type="submit" style={styles.button}>
-          Entrar
+          Cadastrar
         </button>
         {erro && <p style={styles.error}>{erro}</p>}
       </form>

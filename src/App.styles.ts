@@ -120,3 +120,20 @@ export const LangSelect = styled.select`
     color: black;
   }
 `;
+
+export const LoginButton = styled.button`
+  margin-left: auto;
+  padding: 8px 16px;
+  background-color: #0d6efd;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #084cd9;
+  }
+`;

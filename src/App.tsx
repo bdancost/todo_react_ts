@@ -6,7 +6,7 @@ import * as C from "./App.styles";
 import { Item } from "./types/Item";
 import { ListItem } from "./components/ListItem";
 import { AddArea } from "./components/AddArea";
-import { lightTheme, darkTheme, GlobalStyle } from "./App.styles";
+import { lightTheme, darkTheme, GlobalStyle, LoginButton } from "./App.styles";
 import { translations, Idioma } from "./i18n/translations";
 import { FiltroArea } from "./components/FiltroArea";
 import { Dashboard } from "./components/Dashboards/Dashboard";
@@ -17,9 +17,11 @@ import {
   updateTaskStatus,
 } from "./services/taskService";
 import { useAuth } from "./context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -138,6 +140,8 @@ const App = () => {
             <option value="en">🇺🇸</option>
             <option value="es">🇪🇸</option>
           </C.LangSelect>
+
+          <LoginButton onClick={() => navigate("/login")}>Entrar</LoginButton>
         </C.TopBar>
 
         <C.Area>
