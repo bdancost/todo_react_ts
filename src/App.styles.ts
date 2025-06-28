@@ -121,7 +121,7 @@ export const LangSelect = styled.select`
   }
 `;
 
-export const LoginButton = styled.button`
+export const AddButton = styled.button`
   margin-left: auto;
   padding: 8px 16px;
   background-color: #0d6efd;
@@ -136,4 +136,34 @@ export const LoginButton = styled.button`
   &:hover {
     background-color: #084cd9;
   }
+`;
+
+export const AvatarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+`;
+
+export const Avatar = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+`;
+
+export const AvatarImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+export const AvatarInitial = styled.span`
+  font-size: 18px;
 `;

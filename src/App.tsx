@@ -6,7 +6,7 @@ import * as C from "./App.styles";
 import { Item } from "./types/Item";
 import { ListItem } from "./components/ListItem";
 import { AddArea } from "./components/AddArea";
-import { lightTheme, darkTheme, GlobalStyle, LoginButton } from "./App.styles";
+import { lightTheme, darkTheme, GlobalStyle, AddButton } from "./App.styles";
 import { translations, Idioma } from "./i18n/translations";
 import { FiltroArea } from "./components/FiltroArea";
 import { Dashboard } from "./components/Dashboards/Dashboard";
@@ -18,9 +18,15 @@ import {
 } from "./services/taskService";
 import { useAuth } from "./context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import {
+  Avatar,
+  AvatarImage,
+  AvatarInitial,
+  AvatarContainer,
+} from "./App.styles";
 
 const App = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,6 +38,12 @@ const App = () => {
     };
 
     fetchTasks();
+  }, [user]);
+
+  useEffect(() => {
+    if (!user) {
+      setList([]); // Limpa as tarefas quando o usuário desloga
+    }
   }, [user]);
 
   const [idioma, setIdioma] = useState<Idioma>(() => {
@@ -124,6 +136,20 @@ const App = () => {
       <GlobalStyle />
       <C.Container>
         <C.TopBar>
+          {user && (
+            <AvatarContainer>
+              {user.photoURL ? (
+                <AvatarImage src={user.photoURL} alt="Avatar" />
+              ) : (
+                <Avatar>
+                  <AvatarInitial>
+                    {user.email?.charAt(0).toUpperCase()}
+                  </AvatarInitial>
+                </Avatar>
+              )}
+            </AvatarContainer>
+          )}
+
           <C.ToggleThemeButton onClick={() => setDarkMode((prev) => !prev)}>
             {darkMode ? (
               <Sun color="#f1c40f" size={20} />
@@ -141,7 +167,18 @@ const App = () => {
             <option value="es">🇪🇸</option>
           </C.LangSelect>
 
-          <LoginButton onClick={() => navigate("/login")}>Entrar</LoginButton>
+          <div style={{ display: "flex", gap: "10px" }}>
+            <AddButton onClick={() => navigate("/login")}>Entrar</AddButton>
+            <AddButton onClick={() => navigate("/register")}>
+              Registrar
+            </AddButton>
+          </div>
+
+          {user && (
+            <C.AddButton onClick={logout} style={{ marginLeft: "10px" }}>
+              Sair
+            </C.AddButton>
+          )}
         </C.TopBar>
 
         <C.Area>
