@@ -137,7 +137,10 @@ const App = () => {
       <C.Container>
         <C.TopBar>
           {user && (
-            <AvatarContainer>
+            <AvatarContainer
+              onClick={() => navigate("/profile")}
+              style={{ cursor: "pointer" }}
+            >
               {user.photoURL ? (
                 <AvatarImage src={user.photoURL} alt="Avatar" />
               ) : (
@@ -168,7 +171,7 @@ const App = () => {
           </C.LangSelect>
 
           <div style={{ display: "flex", gap: "10px" }}>
-            <AddButton onClick={() => navigate("/login")}>Entrar</AddButton>
+            <AddButton onClick={() => navigate("/login")}>Login</AddButton>
             <AddButton onClick={() => navigate("/register")}>
               Registrar
             </AddButton>
