@@ -153,35 +153,51 @@ const App = () => {
             </AvatarContainer>
           )}
 
-          <C.ToggleThemeButton onClick={() => setDarkMode((prev) => !prev)}>
-            {darkMode ? (
-              <Sun color="#f1c40f" size={20} />
-            ) : (
-              <Moon color="#333" size={20} />
-            )}
-          </C.ToggleThemeButton>
-
-          <C.LangSelect
-            value={idioma}
-            onChange={(e) => setIdioma(e.target.value as Idioma)}
+          <div
+            style={{
+              marginLeft: "auto",
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "10px",
+            }}
           >
-            <option value="pt">🇧🇷</option>
-            <option value="en">🇺🇸</option>
-            <option value="es">🇪🇸</option>
-          </C.LangSelect>
+            {/* Botões lado a lado */}
+            <div style={{ display: "flex", gap: "10px" }}>
+              {!user && (
+                <>
+                  <AddButton onClick={() => navigate("/login")}>
+                    Login
+                  </AddButton>
+                  <AddButton onClick={() => navigate("/register")}>
+                    Registrar
+                  </AddButton>
+                </>
+              )}
+              {user && <AddButton onClick={logout}>Sair</AddButton>}
+            </div>
 
-          <div style={{ display: "flex", gap: "10px" }}>
-            <AddButton onClick={() => navigate("/login")}>Login</AddButton>
-            <AddButton onClick={() => navigate("/register")}>
-              Registrar
-            </AddButton>
+            {/* Idioma e Darkmode empilhados à direita dos botões */}
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            >
+              <C.LangSelect
+                value={idioma}
+                onChange={(e) => setIdioma(e.target.value as Idioma)}
+              >
+                <option value="pt">🇧🇷</option>
+                <option value="en">🇺🇸</option>
+                <option value="es">🇪🇸</option>
+              </C.LangSelect>
+
+              <C.ToggleThemeButton onClick={() => setDarkMode((prev) => !prev)}>
+                {darkMode ? (
+                  <Sun color="#f1c40f" size={20} />
+                ) : (
+                  <Moon color="#333" size={20} />
+                )}
+              </C.ToggleThemeButton>
+            </div>
           </div>
-
-          {user && (
-            <C.AddButton onClick={logout} style={{ marginLeft: "10px" }}>
-              Sair
-            </C.AddButton>
-          )}
         </C.TopBar>
 
         <C.Area>

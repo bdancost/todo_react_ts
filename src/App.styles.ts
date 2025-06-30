@@ -99,10 +99,11 @@ export const ToggleThemeButton = styled.button`
 
 export const TopBar = styled.div`
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 12px;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 10px 20px;
+  flex-wrap: wrap;
+  gap: 20px;
 
   @media (max-width: 600px) {
     flex-direction: column;
