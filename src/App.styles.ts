@@ -4,9 +4,11 @@ import { DefaultTheme } from "styled-components";
 export const lightTheme: DefaultTheme = {
   mode: "light",
   background: "#f2f4f8",
-  text: "#1c1e21",
+  text: "#FFFFFF",
   header: "#0d6efd",
   itemBackground: "#ffffff",
+  headerBackground: "#0d6efd",
+  hover: "#3a3b3c",
 };
 
 export const darkTheme: DefaultTheme = {
@@ -15,6 +17,8 @@ export const darkTheme: DefaultTheme = {
   text: "#e0e0e0",
   header: "#27ae60",
   itemBackground: "#1e1e2f",
+  headerBackground: "#27ae60",
+  hover: "#3a3b3c",
 };
 
 export const GlobalStyle = createGlobalStyle`
@@ -124,8 +128,8 @@ export const LangSelect = styled.select`
 export const AddButton = styled.button`
   margin-left: auto;
   padding: 8px 16px;
-  background-color: #0d6efd;
-  color: #fff;
+  background-color: ${({ theme }) => theme.headerBackground};
+  color: ${({ theme }) => theme.text};
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -134,7 +138,7 @@ export const AddButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #084cd9;
+    background-color: ${({ theme }) => theme.hover};
   }
 `;
 

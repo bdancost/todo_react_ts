@@ -7,5 +7,7 @@ declare module "styled-components" {
     text: string;
     header: string;
     itemBackground: string;
+    headerBackground: string;
+    hover: string;
   }
 }
