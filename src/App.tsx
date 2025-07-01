@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import { Sun, Moon, ListTodo } from "lucide-react";
+import { ListTodo } from "lucide-react";
 
 import * as C from "./App.styles";
 import { Item } from "./types/Item";
 import { ListItem } from "./components/ListItem";
 import { AddArea } from "./components/AddArea";
-import { lightTheme, darkTheme, GlobalStyle, AddButton } from "./App.styles";
+import { lightTheme, darkTheme, GlobalStyle } from "./App.styles";
 import { translations, Idioma } from "./i18n/translations";
 import { FiltroArea } from "./components/FiltroArea";
 import { Dashboard } from "./components/Dashboards/Dashboard";
@@ -17,17 +17,9 @@ import {
   updateTaskStatus,
 } from "./services/taskService";
 import { useAuth } from "./context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import {
-  Avatar,
-  AvatarImage,
-  AvatarInitial,
-  AvatarContainer,
-} from "./App.styles";
-
+import { TopBar } from "./components/TopBar";
 const App = () => {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -135,70 +127,14 @@ const App = () => {
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <GlobalStyle />
       <C.Container>
-        <C.TopBar>
-          {user && (
-            <AvatarContainer
-              onClick={() => navigate("/profile")}
-              style={{ cursor: "pointer" }}
-            >
-              {user.photoURL ? (
-                <AvatarImage src={user.photoURL} alt="Avatar" />
-              ) : (
-                <Avatar>
-                  <AvatarInitial>
-                    {user.email?.charAt(0).toUpperCase()}
-                  </AvatarInitial>
-                </Avatar>
-              )}
-            </AvatarContainer>
-          )}
-
-          <div
-            style={{
-              marginLeft: "auto",
-              display: "flex",
-              alignItems: "flex-start",
-              gap: "10px",
-            }}
-          >
-            {/* Botões lado a lado */}
-            <div style={{ display: "flex", gap: "10px" }}>
-              {!user && (
-                <>
-                  <AddButton onClick={() => navigate("/login")}>
-                    Login
-                  </AddButton>
-                  <AddButton onClick={() => navigate("/register")}>
-                    Registrar
-                  </AddButton>
-                </>
-              )}
-              {user && <AddButton onClick={logout}>Sair</AddButton>}
-            </div>
-
-            {/* Idioma e Darkmode empilhados à direita dos botões */}
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-            >
-              <C.LangSelect
-                value={idioma}
-                onChange={(e) => setIdioma(e.target.value as Idioma)}
-              >
-                <option value="pt">🇧🇷</option>
-                <option value="en">🇺🇸</option>
-                <option value="es">🇪🇸</option>
-              </C.LangSelect>
-
-              <C.ToggleThemeButton onClick={() => setDarkMode((prev) => !prev)}>
-                {darkMode ? (
-                  <Sun color="#f1c40f" size={20} />
-                ) : (
-                  <Moon color="#333" size={20} />
-                )}
-              </C.ToggleThemeButton>
-            </div>
-          </div>
-        </C.TopBar>
+        <TopBar
+          user={user}
+          logout={logout}
+          idioma={idioma}
+          setIdioma={setIdioma}
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+        />
 
         <C.Area>
           <C.Header>

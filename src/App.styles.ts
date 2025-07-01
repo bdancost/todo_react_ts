@@ -172,3 +172,41 @@ export const AvatarImage = styled.img`
 export const AvatarInitial = styled.span`
   font-size: 18px;
 `;
+
+export const LangContainer = styled.div`
+  position: relative;
+`;
+
+export const LangButton = styled.button`
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+`;
+
+export const LangMenu = styled.div`
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background: ${({ theme }) => theme.background};
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+`;
+
+export const LangOption = styled.div`
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.hover};
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+`;
