@@ -19,7 +19,7 @@ import {
 import { useAuth } from "./context/AuthContext";
 import { TopBar } from "./components/TopBar";
 const App = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     const fetchTasks = async () => {
