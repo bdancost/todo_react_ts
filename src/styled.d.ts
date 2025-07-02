@@ -9,5 +9,8 @@ declare module "styled-components" {
     itemBackground: string;
     headerBackground: string;
     hover: string;
+    primary?: string;
+    badge: string;
+    badgeText: string;
   }
 }

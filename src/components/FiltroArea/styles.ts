@@ -16,8 +16,9 @@ export const Container = styled.div`
     transition: all 0.3s;
 
     &.ativo {
-      background-color: ${({ theme }) => theme.text};
+      background-color: ${({ theme }) => theme.primary || theme.text};
       color: ${({ theme }) => theme.background};
+      font-weight: bold;
     }
 
     &:hover {
@@ -25,11 +26,12 @@ export const Container = styled.div`
     }
 
     .badge {
-      background-color: #ddd;
-      color: #333;
+      background-color: ${({ theme }) => theme.badge || "#ddd"};
+      color: ${({ theme }) => theme.badgeText || "#333"};
       font-size: 12px;
       padding: 2px 6px;
       border-radius: 999px;
+      margin-left: 5px;
     }
 
     .badge.pending {

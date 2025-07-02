@@ -4,11 +4,13 @@ import { DefaultTheme } from "styled-components";
 export const lightTheme: DefaultTheme = {
   mode: "light",
   background: "#f2f4f8",
-  text: "#FFFFFF",
+  text: "#333333",
   header: "#0d6efd",
   itemBackground: "#ffffff",
   headerBackground: "#0d6efd",
   hover: "#3a3b3c",
+  badge: "#cccccc",
+  badgeText: "#333",
 };
 
 export const darkTheme: DefaultTheme = {
@@ -19,6 +21,8 @@ export const darkTheme: DefaultTheme = {
   itemBackground: "#1e1e2f",
   headerBackground: "#27ae60",
   hover: "#3a3b3c",
+  badge: "#444444",
+  badgeText: "#555",
 };
 
 export const GlobalStyle = createGlobalStyle`
