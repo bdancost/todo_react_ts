@@ -183,9 +183,20 @@ export const LangContainer = styled.div`
 
 export const LangButton = styled.button`
   background: transparent;
-  border: none;
+  border: 1px solid ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.text};
+  padding: 6px 12px;
+  border-radius: 8px;
   cursor: pointer;
-  padding: 4px;
+  transition: all 0.3s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  svg {
+    vertical-align: middle;
+  }
 `;
 
 export const LangMenu = styled.div`
@@ -199,18 +210,23 @@ export const LangMenu = styled.div`
   z-index: 10;
 `;
 
-export const LangOption = styled.div`
+export const LangOption = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+
+  width: 100%;
   padding: 8px 12px;
+  background: transparent;
+  border: none;
+  color: ${({ theme }) => theme.text};
   cursor: pointer;
-  font-size: 14px;
-  border-bottom: 1px solid #eee;
-  transition: background-color 0.2s;
+  transition: background 0.2s;
 
   &:hover {
     background-color: ${({ theme }) => theme.hover};
   }
 
-  &:last-child {
-    border-bottom: none;
-  }
+  font-size: 14px;
 `;

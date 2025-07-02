@@ -110,13 +110,13 @@ export const TopBar = ({
             {showLang && (
               <LangMenu>
                 <LangOption onClick={() => handleLanguageChange("pt")}>
-                  🇧🇷 Português
+                  🇧🇷 Por
                 </LangOption>
                 <LangOption onClick={() => handleLanguageChange("en")}>
-                  🇺🇸 English
+                  🇺🇸 Eng
                 </LangOption>
                 <LangOption onClick={() => handleLanguageChange("es")}>
-                  🇪🇸 Español
+                  🇪🇸 Esp
                 </LangOption>
               </LangMenu>
             )}
