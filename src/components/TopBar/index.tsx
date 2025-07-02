@@ -1,6 +1,7 @@
 // src/components/TopBar/index.tsx
 import React, { useRef, useEffect } from "react";
 import {
+  LangOption,
   Avatar,
   AvatarImage,
   AvatarInitial,
@@ -8,15 +9,11 @@ import {
   LangContainer,
   LangButton,
   LangMenu,
-  LangOption,
-} from "../../App.styles";
+  AddButton,
+} from "./styles";
 
 import { Globe, Moon, Sun } from "lucide-react";
-import {
-  AddButton,
-  ToggleThemeButton,
-  TopBar as TopBarContainer,
-} from "../../App.styles";
+import { ToggleThemeButton, TopBar as TopBarContainer } from "../../App.styles";
 import { useNavigate } from "react-router-dom";
 import { Idioma } from "../../i18n/translations";
 
